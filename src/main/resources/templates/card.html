@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Cards</title>
+</head>
+<body>
+<h1>Collection</h1>
+<form method="post">
+    <button type="submit" name="action" value="deleteAll">Delete All</button>
+</form>
+<form method="post">
+    <div class="noDataDiv" th:if="${newCards.isEmpty()}">
+        <span>No Card</span>
+    </div>
+    <div class="cards">
+        <div class="card" th:each="newCard : ${newCards}">
+            <button type="submit" name="id"  th:value="${newCard.id}">Delete Card</button>
+            <span class="title" th:text="${newCard.title}"></span>
+            <span class="releaseDate" th:text="${newCard.releaseDate}"></span>
+            <div class="genres">
+                <span th:each="genre : ${newCard.genres}" class="genre" th:text="${genre}"></span>
+            </div>
+            <span class="description" th:text="${newCard.description}"></span>
+            <input type="hidden" name="id" th:text="${newCard.id}">
+        </div>
+    </div>
+</form>
+
+<form method="post" class="addCardForm" th:object="${card}">
+    <div class="inputField">
+        <label for="inputTitle">Title</label>
+        <input type="text" id="inputTitle" th:field="*{title}">
+    </div>
+    <div class="inputField">
+        <label for="inputReleaseDate">Release Date</label>
+        <input type="date" id="inputReleaseDate" th:field="*{releaseDate}">
+    </div>
+    <div class="inputField">
+        <label for="inputGenres">Genres(Comma-separated)</label>
+        <input type="text" id="inputGenres" th:field="*{genres}">
+    </div>
+    <div class="inputField">
+        <label for="inputDescription">Description</label>
+        <textarea id="inputDescription" th:field="*{description}"></textarea>
+    </div>
+    <input type="hidden" th:field="*{photoFile}"/>
+    <button type="submit">Add Card</button>
+</form>
+</body>
+</html>
