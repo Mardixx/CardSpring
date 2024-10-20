@@ -2,12 +2,11 @@ package com.mardixx.cardsSpringAngular.web.controller;
 
 import com.mardixx.cardsSpringAngular.business.model.Card;
 import com.mardixx.cardsSpringAngular.data.CardRepository;
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/card")
@@ -35,9 +34,12 @@ public class CardController {
     }
 
     @PostMapping
-    public String saveCard(Card card) {
-        cardRepository.save(card);
-        return "redirect:card";
+    public String saveCard(@Valid Card card, Errors errors) {
+        if (!errors.hasErrors()) {
+            cardRepository.save(card);
+            return "redirect:card";
+        }
+        return "card";
     }
 
     @PostMapping(params = "action=deleteAll")

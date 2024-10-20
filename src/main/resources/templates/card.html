@@ -8,23 +8,28 @@
 </head>
 <body>
 <h1>Collection</h1>
-<form method="post">
+<!--<form method="post">
     <button type="submit" name="action" value="deleteAll">Delete All</button>
-</form>
+</form>-->
 <form method="post">
     <div class="noDataDiv" th:if="${newCards.isEmpty()}">
         <span>No Card</span>
     </div>
     <div class="cards">
         <div class="card" th:each="newCard : ${newCards}">
-            <button type="submit" name="id"  th:value="${newCard.id}">Delete Card</button>
             <span class="title" th:text="${newCard.title}"></span>
-            <span class="releaseDate" th:text="${newCard.releaseDate}"></span>
-            <div class="genres">
-                <span th:each="genre : ${newCard.genres}" class="genre" th:text="${genre}"></span>
+            <span class="photoFile" th:text="${newCard.photoFile}"></span>
+            <div class="genresAndReleaseDate">
+                <div class="genres">
+                    <span th:each="genre : ${newCard.genres}" class="genre" th:text="${genre}"></span>
+                </div>
+                <div class="releaseDateDiv">
+                    <span>Release Date:</span>
+                    <span class="releaseDate" th:text="${newCard.releaseDate}"></span>
+                </div>
             </div>
             <span class="description" th:text="${newCard.description}"></span>
-            <input type="hidden" name="id" th:text="${newCard.id}">
+            <button class="deleteButton" type="submit" name="id"  th:value="${newCard.id}">Delete Card</button>
         </div>
     </div>
 </form>
@@ -33,20 +38,38 @@
     <div class="inputField">
         <label for="inputTitle">Title</label>
         <input type="text" id="inputTitle" th:field="*{title}">
+        <div class="error" th:errors="*{title}">
+            Error text
+        </div>
     </div>
     <div class="inputField">
         <label for="inputReleaseDate">Release Date</label>
         <input type="date" id="inputReleaseDate" th:field="*{releaseDate}">
+        <div class="error" th:errors="*{releaseDate}">
+            Error text
+        </div>
     </div>
     <div class="inputField">
         <label for="inputGenres">Genres(Comma-separated)</label>
         <input type="text" id="inputGenres" th:field="*{genres}">
+        <div class="error" th:errors="*{genres}">
+            Error text
+        </div>
     </div>
     <div class="inputField">
         <label for="inputDescription">Description</label>
         <textarea id="inputDescription" th:field="*{description}"></textarea>
+        <div class="error" th:errors="*{description}">
+            Error text
+        </div>
     </div>
-    <input type="hidden" th:field="*{photoFile}"/>
+    <div class="inputField">
+        <label for="inputPhotoFile">Photo File</label>
+        <input type="file" id="inputPhotoFile" th:field="*{photoFile}"/>
+        <div class="error" th:errors="*{photoFile}">
+            Error text
+        </div>
+    </div>
     <button type="submit">Add Card</button>
 </form>
 </body>
