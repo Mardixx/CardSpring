@@ -25,7 +25,7 @@ public class Card {
     @GeneratedValue
     private Long id;
 
-    @NotEmpty(message = "Photo File cannot be empty")
+//    @NotEmpty(message = "Photo File cannot be empty")
     private String photoFile;
 
     @NotEmpty(message = "Title cannot be empty")
