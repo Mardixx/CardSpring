@@ -9,6 +9,7 @@ To make it work, you will need to have this repository running for anything to r
 
 Note:
 If nothing happens when you go to `localhost:8080/card` this could be because it hasn't started yet, in this case wait for a bit and retry.
+RUN INTELLIJ AS AN ADMIN
 
 ## About me
 
